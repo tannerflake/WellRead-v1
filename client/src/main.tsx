@@ -4,9 +4,10 @@ import './index.css';
 
 import App from './App.tsx';
 
-import ErrorPage from './pages/Search.tsx';
-import Home from './pages/Recs.tsx';
-import Login from './pages/Shelf.tsx';
+import Shelf from './pages/Shelf.tsx';
+import Search from './pages/Search.tsx';
+import Recs from './pages/Recs.tsx';
+import ErrorPage from './pages/ErrorPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -16,15 +17,23 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />
+        element: <Search />
       }, 
       {
-        path: '/login',
-        element: <Login />
+        path: '/shelf',
+        element: <Shelf />
       }, 
+      {
+        path: '/recommendations',
+        element: <Recs />
+      },
+      {
+        path: '*', // Catch-all route for undefined paths
+        element: <Search />
+      }
     ]
   }
-])
+]);
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
