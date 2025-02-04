@@ -8,6 +8,7 @@ import Shelf from './pages/Shelf.tsx';
 import Search from './pages/Search.tsx';
 import Recs from './pages/Recs.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
+import Login from './pages/Login.tsx';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         path: '/shelf',
         element: <Shelf />
       }, 
+      {
+        path: '/login',
+        element: <Login />
+      },
       {
         path: '/recommendations',
         element: <Recs />
