@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import AuthService from '../utils/auth';
 
 interface UserLoginInterface {
@@ -8,18 +8,10 @@ interface UserLoginInterface {
 
 const Login: React.FC = () => {
   const [userLogin, setUserLogin] = useState<UserLoginInterface>({ username: '', password: '' });
-  const [token, setToken] = useState<string>('');
   const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setUserLogin({ ...userLogin, [name]: value });
   };
-
-  useEffect(() => {
-    if (token && AuthService.loggedIn()) {
-        console.log(token);
-    }
-  }, [token]);
-
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,9 +26,10 @@ const Login: React.FC = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        setToken(data.token);
-        // Handle successful login
-        AuthService.login(data.token);
+        if (data.token) {
+            AuthService.login(data.token);
+        } 
+        
       } else {
         console.error('Invalid login credentials');
       }
