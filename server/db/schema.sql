@@ -3,3 +3,4 @@ DROP DATABASE IF EXISTS friends_db;
 
 -- CREATE DATABASE
 CREATE DATABASE friends_db;
+\c friends_db;
