@@ -31,7 +31,7 @@ const Navbar = () => {
           // Conditional rendering based on loginCheck state
           loginCheck && (
             // Render logout button if user is logged in
-            <button className="btn" type='button' onClick={() => {
+            <button className="logout-button" type='button' onClick={() => {
               auth.logout();  // Call logout() method from auth utility on button click
             }}>Logout</button>
           )

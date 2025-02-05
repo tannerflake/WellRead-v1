@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 
 import App from './App.tsx';
+import { ShelfProvider } from './context/ShelfContext';
 
 import Shelf from './pages/Shelf.tsx';
 import Search from './pages/Search.tsx';
@@ -42,5 +43,9 @@ const router = createBrowserRouter([
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
-  ReactDOM.createRoot(rootElement).render(<RouterProvider router={router} />);
+  ReactDOM.createRoot(rootElement).render(
+    <ShelfProvider>
+      <RouterProvider router={router} />
+    </ShelfProvider>
+  );
 }

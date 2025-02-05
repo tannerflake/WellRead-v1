@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { searchBooks } from '../api/googleBooksAPI';
-import '../index.css'; // Import the CSS file
 import { Book } from '../interfaces/Book';
+import { ShelfContext } from '../context/ShelfContext';
+import BookItem from '../components/BookItem';
+import '../index.css'; // Import the CSS file
 
 const Search: React.FC = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<Book[]>([]);
+  const { addToShelf } = useContext(ShelfContext);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
@@ -27,20 +30,17 @@ const Search: React.FC = () => {
           placeholder="Search for a book..."
           className="search-input"
         />
-        <button onClick={handleSearch} className="btn btn-primary">Find Book</button>
+        <button onClick={handleSearch} className="find-book-button">Find Book</button>
       </div>
       <div className="search-results">
         {results.map((book) => (
-          <div key={book.id} className="book-item">
-            {book.volumeInfo.imageLinks?.thumbnail && (
-              <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title} className="book-image" />
-            )}
-            <div className="book-details">
-              <h3 className="book-title">{book.volumeInfo.title}</h3>
-              <p className="book-authors">{book.volumeInfo.authors?.join(', ')}</p>
-            </div>
-            <button className="btn btn-secondary add-to-shelf">Add to Shelf</button>
-          </div>
+          <BookItem
+            key={book.id}
+            book={book}
+            buttonText="Add to Shelf"
+            buttonClass="btn-secondary add-to-shelf"
+            onButtonClick={() => addToShelf(book)}
+          />
         ))}
       </div>
     </section>
