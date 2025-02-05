@@ -27,9 +27,8 @@ const Login: React.FC = () => {
         const data = await response.json();
         console.log(data);
         if (data.token) {
-            AuthService.login(data.token);
-        } 
-        
+          AuthService.login(data.token);
+        }
       } else {
         console.error('Invalid login credentials');
       }
@@ -39,10 +38,10 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className='login-container'>
       <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div>
+      <form className='login-form' onSubmit={handleLogin}>
+        <div className='form-group'>
           <label htmlFor="username">Username:</label>
           <input
             type="text"
@@ -50,9 +49,10 @@ const Login: React.FC = () => {
             name="username"
             value={userLogin.username}
             onChange={handleFormChange}
+            className='form-input'
           />
         </div>
-        <div>
+        <div className='form-group'>
           <label htmlFor="password">Password:</label>
           <input
             type="password"
@@ -60,9 +60,10 @@ const Login: React.FC = () => {
             name="password"
             value={userLogin.password}
             onChange={handleFormChange}
+            className='form-input'
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className='btn btn-primary'>Login</button>
       </form>
     </div>
   );
