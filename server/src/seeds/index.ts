@@ -15,5 +15,4 @@ const seedAll = async (): Promise<void> => {
     process.exit(1);
   }
 };
-
 seedAll();
