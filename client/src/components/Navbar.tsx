@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import auth from '../utils/auth';
 
 const Navbar = () => {
@@ -19,11 +19,14 @@ const Navbar = () => {
   }, [loginCheck]);  // Dependency array ensures useEffect runs when loginCheck changes
 
   return (
-    <div className="display-flex justify-space-between align-center py-2 px-5 mint-green">
-      <h1>
-        Navbar
-      </h1>
-      <div>
+    <div className="navbar">
+      <div className="nav-links-left nav-links">
+        <Link to="/search">Search</Link>
+        <Link to="/shelf">Shelf</Link>
+        <Link to="/recommendations">Recs</Link>
+      </div>
+      <div className="nav-links-right nav-links">
+        <Link to="/login">Login</Link>
         {
           // Conditional rendering based on loginCheck state
           loginCheck && (
@@ -35,7 +38,7 @@ const Navbar = () => {
         }
       </div>
     </div>
-  )
+  );
 }
 
 export default Navbar;

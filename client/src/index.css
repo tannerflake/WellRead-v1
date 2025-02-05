@@ -1706,3 +1706,49 @@ form [type='radio'] {
     align-content: center;
   }
 }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Mint green background */
+  color: white;
+}
+
+.navbar h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.navbar .nav-links-left,
+.navbar .nav-links-right {
+  display: flex;
+  gap: 15px;
+}
+
+.navbar .nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.navbar .nav-links a:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.navbar .btn {
+  background-color: #f44336; /* Red background for logout button */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.navbar .btn:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
