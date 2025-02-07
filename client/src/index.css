@@ -1908,7 +1908,7 @@ form [type='radio'] {
 
 .find-book-button {
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: #1c361d;
   color: white;
   border: none;
   border-radius: 4px;
@@ -1917,7 +1917,7 @@ form [type='radio'] {
 }
 
 .find-book-button:hover {
-  background-color: #45a049;
+  background-color: #1e6622;
 }
 
 .btn {
@@ -2013,7 +2013,7 @@ form [type='radio'] {
 
 .logout-button {
   padding: 10px 20px;
-  background-color: #eec3c0; /* Red background for logout button */
+  background-color: #54f951; /* Red background for logout button */
   color: rgb(0, 0, 0);
   border: none;
   border-radius: 4px;
