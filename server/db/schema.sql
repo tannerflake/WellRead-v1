@@ -1,6 +1,6 @@
 -- DROP DATABASE
-DROP DATABASE IF EXISTS friends_db;
+DROP DATABASE IF EXISTS books_db;
 
 -- CREATE DATABASE
-CREATE DATABASE friends_db;
-\c friends_db;
+CREATE DATABASE books_db;
+\c books_db;
