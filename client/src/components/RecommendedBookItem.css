@@ -1,81 +1,131 @@
 .recommended-book-item {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    position: relative;
-    width: 100%;
-    max-width: 600px;
-    box-sizing: border-box;
-    background-color: #f9f9f9;
-  }
-  
-  .recommended-book-item .book-image {
-    width: 200px;
-    height: auto;
-    border-radius: 4px;
-  }
-  
-  .recommended-book-item .book-details {
-    text-align: center;
-  }
-  
-  .recommended-book-item .book-title {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .recommended-book-item .book-authors {
-    margin: 5px 0;
-    font-size: 1rem;
-  }
-  
-  .recommended-book-item .book-description {
-    margin: 10px 0;
-    font-size: 0.9rem;
-  }
-  
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* Ensure the container can be wide */
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+
+.recommended-book-item .book-image {
+  width: 100%; /* Allow the image to take full width of its container */
+  max-width: 200px; /* Set a maximum width for the image */
+  height: auto;
+  border-radius: 4px;
+}
+
+.recommended-book-item .book-details {
+  text-align: center;
+  margin-bottom: 70px; /* Add margin to create space between text and buttons */
+}
+
+.recommended-book-item .book-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.recommended-book-item .book-authors {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+.recommended-book-item .book-description {
+  margin: 10px 0;
+  font-size: 0.9rem;
+}
+
+.recommended-book-item .book-buttons {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.recommended-book-item .btn {
+  font-size: 1.2rem; /* Increase font size */
+  height: 50px; /* Set a fixed height */
+  width: 150px; /* Set a fixed width */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.recommended-book-item #btn-dismiss {
+  position: absolute;
+  bottom: 10px; /* Adjust bottom to bring button closer to the edge */
+  left: 20px;
+  background-color: #f44336;
+  color: white;
+}
+
+.recommended-book-item #btn-dismiss:hover {
+  background-color: #d32f2f;
+}
+
+.recommended-book-item #btn-want-to-read {
+  position: absolute;
+  bottom: 10px; /* Adjust bottom to bring button closer to the edge */
+  right: 20px;
+  background-color: #008CBA;
+  color: white;
+}
+
+.recommended-book-item #btn-want-to-read:hover {
+  background-color: #007bb5;
+}
+
+.recommended-book-item #btn-add-to-shelf {
+  position: absolute;
+  bottom: 10px; /* Adjust bottom to bring button closer to the edge */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+}
+
+.recommended-book-item #btn-add-to-shelf:hover {
+  background-color: #45a049;
+}
+
+.recommendation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ensure the container takes full width */
+}
+
+/* Media query for mobile screens */
+@media (max-width: 600px) {
   .recommended-book-item .book-buttons {
-    display: flex;
-    gap: 10px;
+    flex-direction: column; /* Stack buttons on top of each other */
+    align-items: center;
+    gap: 10px; /* Add space between buttons */
+    padding: 0; /* Remove padding to bring buttons closer to the text */
   }
-  
+
   .recommended-book-item .btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    width: 100%; /* Make buttons take full width */
+    max-width: none; /* Remove max-width constraint */
   }
-  
-  .recommended-book-item .btn-danger {
-    background-color: #f44336;
-    color: white;
+
+  .recommended-book-item #btn-dismiss,
+  .recommended-book-item #btn-want-to-read,
+  .recommended-book-item #btn-add-to-shelf {
+    position: static; /* Remove absolute positioning */
+    transform: none; /* Remove transform */
   }
-  
-  .recommended-book-item .btn-danger:hover {
-    background-color: #d32f2f;
+
+  .recommended-book-item .book-details {
+    margin-bottom: 20px; /* Reduce margin to bring buttons closer to the text */
   }
-  
-  .recommended-book-item .btn-secondary {
-    background-color: #008CBA;
-    color: white;
-  }
-  
-  .recommended-book-item .btn-secondary:hover {
-    background-color: #007bb5;
-  }
-  
-  .recommended-book-item .btn-primary {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .recommended-book-item .btn-primary:hover {
-    background-color: #45a049;
-  }
+}

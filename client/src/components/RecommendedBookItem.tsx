@@ -21,9 +21,9 @@ const RecommendedBookItem: React.FC<RecommendedBookItemProps> = ({ book, onAddTo
         <p className="book-description">{book.volumeInfo.description}</p>
       </div>
       <div className="book-buttons">
-        <button className="btn btn-danger" onClick={onDismissClick}>X</button>
-        <button className="btn btn-secondary" onClick={onWantToReadClick}>Want to Read</button>
-        <button className="btn btn-primary" onClick={onAddToShelfClick}>Add to Shelf</button>
+        <button id="btn-dismiss" className="btn" onClick={onDismissClick}>Next</button>
+        <button id="btn-want-to-read" className="btn" onClick={onWantToReadClick}>Want to Read</button>
+        <button id="btn-add-to-shelf" className="btn" onClick={onAddToShelfClick}>Add to Shelf</button>
       </div>
     </div>
   );
