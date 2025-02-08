@@ -21,12 +21,13 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="nav-links-left nav-links">
-        <Link to="/search">Search</Link>
-        <Link to="/shelf">Shelf</Link>
-        <Link to="/recommendations">Recs</Link>
+        <Link to="/Search">Search</Link>
+        <Link to="/Shelf">Shelf</Link>
+        <Link to="/WantToRead">Want To Read</Link>
+        <Link to="/Recommendations">Recs</Link>
       </div>
       <div className="nav-links-right nav-links">
-        <Link to="/login">Login</Link>
+        <Link to="/Login">Login</Link>
         {
           // Conditional rendering based on loginCheck state
           loginCheck && (
