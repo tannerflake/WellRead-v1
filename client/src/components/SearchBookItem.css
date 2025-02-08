@@ -46,7 +46,7 @@
   background-color: #4CAF50;
   color: white;
   position: absolute;
-  top: 20px;
+  bottom: 20px;
   right: 20px;
 }
 
@@ -58,7 +58,7 @@
   background-color: #008CBA;
   color: white;
   position: absolute;
-  bottom: 20px;
+  bottom: 60px;
   right: 20px;
 }
 
