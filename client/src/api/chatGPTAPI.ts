@@ -7,8 +7,8 @@ const openai = new OpenAI({
   dangerouslyAllowBrowser: true
 });
 
-export const getBookRecommendations = async (bookshelf: string[]): Promise<Book[]> => {
-  const prompt = `Based on the following books, recommend 5 books: ${bookshelf.join(', ')}`;
+export const getBookRecommendations = async (bookshelf: string[]): Promise<Book | null> => {
+  const prompt = `Based on the following books, recommend a book: ${bookshelf.join(', ')}`;
 
   try {
     const response = await openai.chat.completions.create({
@@ -20,41 +20,33 @@ export const getBookRecommendations = async (bookshelf: string[]): Promise<Book[
       max_tokens: 150,
     });
 
-    const recommendations = response.choices[0]?.message?.content?.trim().split('\n') || [];
-    console.log('Recommendations from OpenAI:', recommendations);
+    const recommendation = response.choices[0]?.message?.content?.trim().split('\n')[0] || '';
+    console.log('Recommendation from OpenAI:', recommendation);
 
-    const validRecommendations = recommendations
-      .map(rec => rec.replace(/^\d+\.\s*/, '').trim()) // Remove numbering and trim
-      .filter(rec => rec && !rec.startsWith('Based on the information provided'));
-
-    const books: Book[] = [];
-    for (const title of validRecommendations) {
-      console.log('Searching for book title:', title);
-      const googleBooksResponse = await axios.get('https://www.googleapis.com/books/v1/volumes', {
-        params: {
-          q: title,
-          maxResults: 1,
+    const googleBooksResponse = await axios.get('https://www.googleapis.com/books/v1/volumes', {
+      params: {
+        q: recommendation,
+        maxResults: 1,
+      },
+    });
+    console.log('Google Books API response:', googleBooksResponse.data);
+    const book = googleBooksResponse.data.items[0];
+    if (book) {
+      return {
+        id: book.id,
+        volumeInfo: {
+          title: book.volumeInfo.title,
+          authors: book.volumeInfo.authors,
+          publishedDate: book.volumeInfo.publishedDate,
+          description: book.volumeInfo.description,
+          imageLinks: book.volumeInfo.imageLinks,
         },
-      });
-      console.log('Google Books API response:', googleBooksResponse.data);
-      const book = googleBooksResponse.data.items[0];
-      if (book) {
-        books.push({
-          id: book.id,
-          volumeInfo: {
-            title: book.volumeInfo.title,
-            authors: book.volumeInfo.authors,
-            publishedDate: book.volumeInfo.publishedDate,
-            description: book.volumeInfo.description,
-            imageLinks: book.volumeInfo.imageLinks,
-          },
-        });
-      }
+      };
     }
 
-    return books;
+    return null;
   } catch (error) {
     console.error('Error from OpenAI or Google Books:', error);
-    return [];
+    return null;
   }
 };

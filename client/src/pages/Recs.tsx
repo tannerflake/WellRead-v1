@@ -1,37 +1,55 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ShelfContext } from '../context/ShelfContext';
+import { WantToReadContext } from '../context/WantToReadContext';
 import { getBookRecommendations } from '../api/chatGPTAPI';
-import SearchBookItem from '../components/SearchBookItem';
+import RecommendedBookItem from '../components/RecommendedBookItem';
 import { Book } from '../interfaces/Book';
 
 const Recs: React.FC = () => {
-  const { shelf } = useContext(ShelfContext);
-  const [recommendations, setRecommendations] = useState<Book[]>([]);
+  const { shelf, addToShelf } = useContext(ShelfContext);
+  const { addToWantToRead } = useContext(WantToReadContext);
+  const [recommendation, setRecommendation] = useState<Book | null>(null);
+
+  const fetchRecommendation = async () => {
+    const bookTitles = shelf.map((book: Book) => book.volumeInfo.title);
+    const rec = await getBookRecommendations(bookTitles);
+    setRecommendation(rec);
+  };
 
   useEffect(() => {
-    const fetchRecommendations = async () => {
-      if (shelf && shelf.length > 0) {
-        const bookTitles = shelf.map(book => book.volumeInfo.title);
-        const recs = await getBookRecommendations(bookTitles);
-        setRecommendations(recs);
-      }
-    };
-
-    fetchRecommendations();
+    fetchRecommendation();
   }, [shelf]);
+
+  const handleAddToShelf = () => {
+    if (recommendation) {
+      addToShelf(recommendation);
+      fetchRecommendation();
+    }
+  };
+
+  const handleWantToRead = () => {
+    if (recommendation) {
+      addToWantToRead(recommendation);
+      fetchRecommendation();
+    }
+  };
+
+  const handleDismiss = () => {
+    fetchRecommendation();
+  };
 
   return (
     <section>
       <h1>Recommendations</h1>
-      <div className="search-results">
-        {recommendations.map((book) => (
-          <SearchBookItem
-            key={book.id}
-            book={book}
-            onAddToShelfClick={() => {}}
-            onWantToReadClick={() => {}}
+      <div className="recommendation-container">
+        {recommendation && (
+          <RecommendedBookItem
+            book={recommendation}
+            onAddToShelfClick={handleAddToShelf}
+            onWantToReadClick={handleWantToRead}
+            onDismissClick={handleDismiss}
           />
-        ))}
+        )}
       </div>
     </section>
   );
