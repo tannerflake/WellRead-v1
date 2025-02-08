@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ShelfContext } from '../context/ShelfContext';
 import { getBookRecommendations } from '../api/chatGPTAPI';
+import SearchBookItem from '../components/SearchBookItem';
+import { Book } from '../interfaces/Book';
 
 const Recs: React.FC = () => {
   const { shelf } = useContext(ShelfContext);
-  const [recommendations, setRecommendations] = useState<string[]>([]);
+  const [recommendations, setRecommendations] = useState<Book[]>([]);
 
   useEffect(() => {
     const fetchRecommendations = async () => {
@@ -21,11 +23,16 @@ const Recs: React.FC = () => {
   return (
     <section>
       <h1>Recommendations</h1>
-      <ul>
-        {recommendations.map((rec, index) => (
-          <li key={index}>{rec}</li>
+      <div className="search-results">
+        {recommendations.map((book) => (
+          <SearchBookItem
+            key={book.id}
+            book={book}
+            onAddToShelfClick={() => {}}
+            onWantToReadClick={() => {}}
+          />
         ))}
-      </ul>
+      </div>
     </section>
   );
 };

@@ -1705,7 +1705,7 @@ form [type='radio'] {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #4CAF50; /* Mint green background */
+  background-color: #59613b; /* Mint green background */
   color: white;
 }
 
@@ -1729,7 +1729,7 @@ form [type='radio'] {
 }
 
 .navbar .nav-links a:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #7f8364; /* Darker green on hover */
 }
 
 .navbar .btn {
@@ -2024,8 +2024,8 @@ form [type='radio'] {
 
 .logout-button {
   padding: 10px 20px;
-  background-color: #54f951; /* Red background for logout button */
-  color: rgb(0, 0, 0);
+  background-color: #474a36; /* Red background for logout button */
+  color: rgb(255, 255, 255);
   border: none;
   border-radius: 4px;
   cursor: pointer;

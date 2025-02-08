@@ -7,6 +7,8 @@
   align-items: flex-start;
   gap: 20px;
   position: relative;
+  min-width: 500px;
+  min-height: 150px;
 }
 
 .search-book-item h3 {
