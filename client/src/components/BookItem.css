@@ -7,6 +7,11 @@
   align-items: flex-start;
   gap: 20px;
   position: relative;
+  width: 100%; /* Allow the book item to take full width of its container */
+  max-width: 90%; /* Set a maximum width */
+  min-width: 450px; /* Set a minimum width */
+  box-sizing: border-box; /* Ensure padding and border are included in the width */
+  background-color: #f9f9f9; /* Add background color for debugging */
 }
 
 .book-item h3 {

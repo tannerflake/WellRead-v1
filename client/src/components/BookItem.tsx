@@ -1,6 +1,6 @@
 import React from 'react';
 import { Book } from '../interfaces/Book';
-import '../index.css'; // Import the CSS file
+import './BookItem.css'; // Import the CSS file
 
 interface BookItemProps {
   book: Book;

@@ -1937,8 +1937,19 @@ form [type='radio'] {
   background-color: #45a049;
 }
 
+.shelf-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 100%; /* Ensure the container takes full width */
+}
+
 .search-results {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Ensure the container takes full width */
 }
 
 .book-item {
