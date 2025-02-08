@@ -2,13 +2,15 @@ import React, { useState, useContext } from 'react';
 import { searchBooks } from '../api/googleBooksAPI';
 import { Book } from '../interfaces/Book';
 import { ShelfContext } from '../context/ShelfContext';
-import BookItem from '../components/BookItem';
+import { WantToReadContext } from '../context/WantToReadContext';
+import SearchBookItem from '../components/SearchBookItem';
 import '../index.css'; // Import the CSS file
 
 const Search: React.FC = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<Book[]>([]);
   const { addToShelf } = useContext(ShelfContext);
+  const { addToWantToRead } = useContext(WantToReadContext);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
@@ -34,12 +36,11 @@ const Search: React.FC = () => {
       </div>
       <div className="search-results">
         {results.map((book) => (
-          <BookItem
+          <SearchBookItem
             key={book.id}
             book={book}
-            buttonText="Add to Shelf"
-            buttonClass="btn-secondary add-to-shelf"
-            onButtonClick={() => addToShelf(book)}
+            onAddToShelfClick={() => addToShelf(book)}
+            onWantToReadClick={() => addToWantToRead(book)}
           />
         ))}
       </div>

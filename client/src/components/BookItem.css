@@ -1,0 +1,59 @@
+.book-item {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  position: relative;
+}
+
+.book-item h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.book-item p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.book-image {
+  max-width: 100px;
+  margin-right: 20px;
+}
+
+.book-details {
+  flex: 1;
+}
+
+.book-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Add space between buttons */
+}
+
+.book-buttons .btn {
+  padding: 5px 10px; /* Make buttons smaller */
+  font-size: 0.8rem; /* Adjust font size */
+}
+
+.book-buttons .add-to-shelf {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.book-buttons .add-to-shelf:hover {
+  background-color: #45a049;
+}
+
+.book-buttons .want-to-read {
+  background-color: #008CBA;
+  color: white;
+}
+
+.book-buttons .want-to-read:hover {
+  background-color: #007bb5;
+}

@@ -1,0 +1,65 @@
+.search-book-item {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  position: relative;
+}
+
+.search-book-item h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.search-book-item p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.book-image {
+  max-width: 100px;
+  margin-right: 20px;
+}
+
+.book-details {
+  flex: 1;
+}
+
+.btn {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100px; /* Smaller fixed width */
+  height: 30px; /* Smaller fixed height */
+}
+
+.add-to-shelf {
+  background-color: #4CAF50;
+  color: white;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.add-to-shelf:hover {
+  background-color: #45a049;
+}
+
+.want-to-read {
+  background-color: #008CBA;
+  color: white;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.want-to-read:hover {
+  background-color: #007bb5;
+}
