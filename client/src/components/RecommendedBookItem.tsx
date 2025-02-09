@@ -23,7 +23,7 @@ const RecommendedBookItem: React.FC<RecommendedBookItemProps> = ({ book, onAddTo
       <div className="book-buttons">
         <button id="btn-dismiss" className="btn" onClick={onDismissClick}>Next</button>
         <button id="btn-want-to-read" className="btn" onClick={onWantToReadClick}>Want to Read</button>
-        <button id="btn-add-to-shelf" className="btn" onClick={onAddToShelfClick}>Add to Shelf</button>
+        <button id="btn-add-to-shelf" className="btn" onClick={onAddToShelfClick}>Favorite</button>
       </div>
     </div>
   );
