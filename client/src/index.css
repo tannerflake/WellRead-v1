@@ -2035,3 +2035,28 @@ form [type='radio'] {
 .logout-button:hover {
   background-color: #d32f2f; /* Darker red on hover */
 }
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #ccc;
+  color: #fff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tab.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.tab:not(.active) {
+  background-color: #f0f0f0;
+  color: #888;
+}

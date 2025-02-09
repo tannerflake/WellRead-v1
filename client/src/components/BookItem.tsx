@@ -19,7 +19,9 @@ const BookItem: React.FC<BookItemProps> = ({ book, buttonText, buttonClass, onBu
         <h3 className="book-title">{book.volumeInfo.title}</h3>
         <p className="book-authors">{book.volumeInfo.authors?.join(', ')}</p>
       </div>
-      <button className={`btn ${buttonClass}`} onClick={onButtonClick}>{buttonText}</button>
+      <button className={`btn ${buttonClass}`} onClick={onButtonClick}>
+        {buttonText}
+      </button>
     </div>
   );
 };

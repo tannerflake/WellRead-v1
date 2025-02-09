@@ -1,24 +1,51 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { ShelfContext } from '../context/ShelfContext';
+import { WantToReadContext } from '../context/WantToReadContext';
 import BookItem from '../components/BookItem';
 import '../index.css'; // Import the CSS file
 
 const Shelf: React.FC = () => {
   const { shelf, removeFromShelf } = useContext(ShelfContext);
+  const { wantToRead, removeFromWantToRead } = useContext(WantToReadContext);
+  const [selectedTab, setSelectedTab] = useState<'shelf' | 'wantToRead'>('shelf');
 
   return (
-    <section className="search-container">
-      <h1>Shelf</h1>
+    <section className="shelf-container">
+      <div className="tabs">
+        <div
+          className={`tab ${selectedTab === 'shelf' ? 'active' : ''}`}
+          onClick={() => setSelectedTab('shelf')}
+        >
+          Shelf
+        </div>
+        <div
+          className={`tab ${selectedTab === 'wantToRead' ? 'active' : ''}`}
+          onClick={() => setSelectedTab('wantToRead')}
+        >
+          Want to Read
+        </div>
+      </div>
       <div className="search-results">
-        {shelf.map((book) => (
-          <BookItem
-            key={book.id}
-            book={book}
-            buttonText="Remove"
-            buttonClass="btn-danger remove-from-shelf"
-            onButtonClick={() => removeFromShelf(book.id)}
-          />
-        ))}
+        {selectedTab === 'shelf' &&
+          shelf.map((book) => (
+            <BookItem
+              key={book.id}
+              book={book}
+              buttonText="Remove"
+              buttonClass="btn-danger remove-from-shelf"
+              onButtonClick={() => removeFromShelf(book.id)}
+            />
+          ))}
+        {selectedTab === 'wantToRead' &&
+          wantToRead.map((book) => (
+            <BookItem
+              key={book.id}
+              book={book}
+              buttonText="Remove"
+              buttonClass="btn-danger remove-from-wantToRead"
+              onButtonClick={() => removeFromWantToRead(book.id)}
+            />
+          ))}
       </div>
     </section>
   );
