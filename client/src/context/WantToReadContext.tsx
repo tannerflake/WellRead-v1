@@ -17,11 +17,11 @@ export const WantToReadProvider: React.FC<{ children: ReactNode }> = ({ children
   const [wantToRead, setWantToRead] = useState<Book[]>([]);
 
   const addToWantToRead = (book: Book) => {
-    setWantToRead((prevList) => [...prevList, book]);
+    setWantToRead((prevWantToRead) => [...prevWantToRead, book]);
   };
 
   const removeFromWantToRead = (bookId: string) => {
-    setWantToRead((prevList) => prevList.filter(book => book.id !== bookId));
+    setWantToRead((prevWantToRead) => prevWantToRead.filter(book => book.id !== bookId));
   };
 
   return (
