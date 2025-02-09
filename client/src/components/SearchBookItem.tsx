@@ -19,7 +19,7 @@ const SearchBookItem: React.FC<SearchBookItemProps> = ({ book, onAddToShelfClick
         <p className="book-authors">{book.volumeInfo.authors?.join(', ')}</p>
       </div>
       <button className="btn want-to-read" onClick={onWantToReadClick}>Want to Read</button>
-      <button className="btn add-to-shelf" onClick={onAddToShelfClick}>Add to Shelf</button>
+      <button className="btn add-to-shelf" onClick={onAddToShelfClick}>Favorite</button>
     </div>
   );
 };

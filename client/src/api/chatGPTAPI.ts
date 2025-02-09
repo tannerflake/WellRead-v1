@@ -32,13 +32,29 @@ export const getBookRecommendations = async (bookshelf: string[]): Promise<Book 
     console.log('Google Books API response:', googleBooksResponse.data);
     const book = googleBooksResponse.data.items[0];
     if (book) {
+      const title = book.volumeInfo.title;
+      const authors = book.volumeInfo.authors?.join(', ');
+
+      const synopsisPrompt = `Provide a 3-sentence synopsis for the book titled "${title}" by ${authors} that would make someone want to read it.`;
+
+      const synopsisResponse = await openai.chat.completions.create({
+        model: 'gpt-3.5-turbo',
+        messages: [
+          { role: 'system', content: 'You are a helpful assistant.' },
+          { role: 'user', content: synopsisPrompt },
+        ],
+        max_tokens: 150,
+      });
+
+      const synopsis = synopsisResponse.choices[0]?.message?.content?.trim() || '';
+
       return {
         id: book.id,
         volumeInfo: {
           title: book.volumeInfo.title,
           authors: book.volumeInfo.authors,
           publishedDate: book.volumeInfo.publishedDate,
-          description: book.volumeInfo.description,
+          description: synopsis, // Use the synopsis from ChatGPT
           imageLinks: book.volumeInfo.imageLinks,
         },
       };
