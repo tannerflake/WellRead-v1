@@ -10,18 +10,19 @@ interface JwtPayload {
 export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
   // Get the authorization header from the request
   const authHeader = req.headers.authorization;
-
+  console.log(authHeader);
   // Check if the authorization header is present
   if (authHeader) {
     // Extract the token from the authorization header
-    const token = authHeader.split(' ')[1];
-
+    const token = authHeader.split('.')[1];
+    console.log(token);
     // Get the secret key from the environment variables
     const secretKey = process.env.JWT_SECRET_KEY || '';
 
     // Verify the JWT token
-    jwt.verify(token, secretKey, (err, user) => {
+    jwt.verify(authHeader, secretKey, (err, user) => {
       if (err) {
+        console.log(err);
         return res.sendStatus(403); // Send forbidden status if the token is invalid
       }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Book } from '../interfaces/Book';
 import './SearchBookItem.css'; // Import the CSS file
+// import { ShelvedBookInterface } from '../interfaces/ShelvedBookInterface';
 
 interface SearchBookItemProps {
   book: Book;

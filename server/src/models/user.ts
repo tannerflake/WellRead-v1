@@ -49,7 +49,7 @@ export function UserFactory(sequelize: Sequelize): typeof User {
       password: {
         type: DataTypes.STRING,
         allowNull: false,
-      },
+      }
     },
     {
       tableName: 'users',  // Name of the table in PostgreSQL

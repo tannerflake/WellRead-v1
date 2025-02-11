@@ -1,6 +1,6 @@
 import express from 'express';
 import type { Request, Response } from 'express';
-import { User } from '../../models/index.js';
+import { User, ShelvedBooks} from '../../models/index.js';
 
 const router = express.Router();
 
@@ -21,7 +21,13 @@ router.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const user = await User.findByPk(id, {
-      attributes: { exclude: ['password'] }
+      attributes: { exclude: ['password'] },
+      include: [
+        {
+          model: ShelvedBooks,
+          as: 'shelvedBooks',
+        },
+      ],
     });
     if (user) {
       res.json(user);
@@ -53,6 +59,26 @@ router.put('/:id', async (req: Request, res: Response) => {
     if (user) {
       user.username = username;
       user.password = password;
+      await user.save();
+      res.json(user);
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error: any) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+router.put('/favoriteBooks', async (req: Request, res: Response) => {
+  //const { id } = req.params;
+  const username = req.user?.username;
+  // const { favoriteBooks } = req.body;
+  try {
+    const user = await User.findOne({
+      where: { username },
+    });
+    if (user) {
+      // user.favoriteBooks = [...user.favoriteBooks, favoriteBooks];
       await user.save();
       res.json(user);
     } else {
