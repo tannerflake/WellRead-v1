@@ -1,23 +1,25 @@
 import React from 'react';
-import { Book } from '../interfaces/Book';
+// import { Book } from '../interfaces/Book';
 import './BookItem.css'; // Import the CSS file
+import { ShelvedBookInterface } from '../interfaces/ShelvedBookInterface';
 
 interface BookItemProps {
-  book: Book;
+  shelvedBook: ShelvedBookInterface;
   buttonText: string;
   buttonClass: string;
   onButtonClick: () => void;
 }
 
-const BookItem: React.FC<BookItemProps> = ({ book, buttonText, buttonClass, onButtonClick }) => {
+const BookItem: React.FC<BookItemProps> = ({ shelvedBook, buttonText, buttonClass, onButtonClick }) => {
+  console.log("shelved book", shelvedBook);
   return (
     <div className="book-item">
-      {book.volumeInfo.imageLinks?.thumbnail && (
-        <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title} className="book-image" />
+      {shelvedBook?.image && (
+        <img src={shelvedBook.image} alt={shelvedBook.title} className="book-image" />
       )}
       <div className="book-details">
-        <h3 className="book-title">{book.volumeInfo.title}</h3>
-        <p className="book-authors">{book.volumeInfo.authors?.join(', ')}</p>
+        <h3 className="book-title">{shelvedBook.title}</h3>
+        <p className="book-authors">{shelvedBook.authors}</p>
       </div>
       <button className={`btn ${buttonClass}`} onClick={onButtonClick}>
         {buttonText}

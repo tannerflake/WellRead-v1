@@ -1,4 +1,4 @@
-import { User, ShelvedBooks } from "../../models/index.js";
+import {  ShelvedBooks } from "../../models/index.js";
 import { Router } from "express";
 const router = Router();
 
@@ -6,7 +6,11 @@ const router = Router();
 router.get('/', async (_req, res) => {
   try {
     const shelvedBooks = await ShelvedBooks.findAll({
-      include: [User],
+      include: [
+        {
+          all: true,
+        },
+      ]
     });
     res.status(200).json(shelvedBooks);
   } catch (error) {

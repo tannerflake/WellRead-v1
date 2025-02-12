@@ -1,16 +1,17 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { searchBooks } from '../api/googleBooksAPI';
 import { Book } from '../interfaces/Book';
-import { ShelfContext } from '../context/ShelfContext';
+// import { ShelfContext } from '../context/ShelfContext';
 // import { WantToReadContext } from '../context/WantToReadContext';
 import SearchBookItem from '../components/SearchBookItem';
 import '../index.css'; // Import the CSS file
 import { ShelvedBookInterface } from '../interfaces/ShelvedBookInterface';
+import auth from '../utils/auth';
 
 const Search: React.FC = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<Book[]>([]);
-  const { addToShelf } = useContext(ShelfContext);
+  // const { addToShelf } = useContext(ShelfContext);
   // const { addToWantToRead } = useContext(WantToReadContext);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,15 +23,32 @@ const Search: React.FC = () => {
     setResults(books);
   };
 
-  const addToWantToRead = (book: ShelvedBookInterface) => {
+  useEffect(() => {
+    console.log('Results:', results
+    );
+  }, [results]);
+
+  const handleShelf = (book: Book, shelfType: 'favorite' | "wantToRead") => {
     //make post request to /api/shelf
-    console.log(`Book is ${book}`);
+    const authors: string[] = book.volumeInfo.authors as string[];
+    const shelvedBook: ShelvedBookInterface = {
+      title: book.volumeInfo.title,
+      authors: authors.join(', ') ,
+      description: book.volumeInfo.description as string,
+      image: book?.volumeInfo?.imageLinks?.thumbnail || '',
+      userId: auth.getProfile().id as number,
+      isFavorite: shelfType === 'favorite',
+      isWantToRead: shelfType === 'wantToRead',
+    }
+
+    console.log("book:", book);
     fetch('/api/shelf', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'authorization': `Bearer ${auth.getToken()}`
       },
-      body: JSON.stringify(book),
+      body: JSON.stringify(shelvedBook),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -59,8 +77,8 @@ const Search: React.FC = () => {
           <SearchBookItem
             key={book.id}
             book={book}
-            onAddToShelfClick={() => addToShelf(book)}
-            onWantToReadClick={() => addToWantToRead(book as ShelvedBookInterface)}
+            onAddToShelfClick={() => handleShelf(book, 'favorite')}
+            onWantToReadClick={() => handleShelf(book, 'wantToRead')}
           />
         ))}
       </div>

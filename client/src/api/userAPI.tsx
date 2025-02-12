@@ -21,5 +21,27 @@ const retrieveUsers = async () => {
     return [];
   }
 }
+//get user by id
+const retrieveUserById = async (id: number) => {
+  try {
+    const response = await fetch(`/api/users/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Auth.getToken()}`
+      }
+    });
+    const data = await response.json();
 
-export { retrieveUsers };
+    if(!response.ok) {
+      throw new Error('Invalid user API response, check network tab!');
+    }
+    console.log('userdata:', data);
+    return data;
+
+  } catch (err) { 
+    console.log('Error from data retrieval:', err);
+    return [];
+  }
+}
+
+export { retrieveUsers, retrieveUserById };

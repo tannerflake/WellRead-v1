@@ -6,7 +6,7 @@ interface ShelvedBooksAttributes {
   id: number;
   title: string;
   image: string;
-  author: string;
+  authors: string;
   userId: number; // Foreign key to reference the User model
   isFavorite: boolean;
   isWantToRead: boolean;
@@ -20,7 +20,7 @@ export class ShelvedBooks extends Model<ShelvedBooksAttributes, ShelvedBooksCrea
   public id!: number;
   public title!: string;
   public image!: string;
-  public author!: string;
+  public authors!: string;
   public userId!: number;
   public isFavorite!: boolean;
   public isWantToRead!: boolean;
@@ -46,7 +46,7 @@ export function ShelvedBooksFactory(sequelize: Sequelize): typeof ShelvedBooks {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      author: {
+      authors: {
         type: DataTypes.STRING,
         allowNull: false,
       },

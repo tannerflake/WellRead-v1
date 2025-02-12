@@ -26,10 +26,9 @@ export const login = async (req: Request, res: Response) => {
   }
 
   // Get the secret key from environment variables
-  const secretKey = process.env.JWT_SECRET_KEY || '';
-
+  const secretKey = process.env.JWT_SECRET_KEY;
   // Generate a JWT token for the authenticated user
-  const token = jwt.sign({ username, id:user.id }, secretKey, { expiresIn: '1h' });
+  const token = jwt.sign({ username, id:user.id }, secretKey as string, { expiresIn: '1h' });
   return res.json({ token });  // Send the token as a JSON response
 };
 
@@ -40,3 +39,8 @@ const router = Router();
 router.post('/login', login);  // Define the login route
 
 export default router;  // Export the router instance
+
+
+
+
+
