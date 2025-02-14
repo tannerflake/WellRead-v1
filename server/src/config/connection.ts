@@ -18,10 +18,14 @@ const sequelize = process.env.DB_URL
       process.env.DB_USER || '',
       process.env.DB_PASSWORD || '', // Ensure this is a string
       {
-        host: 'localhost',
+        host: process.env.DB_HOST || 'localhost',
         dialect: 'postgres',
         dialectOptions: {
           decimalNumbers: true,
+          ssl: {
+            require: true,
+            rejectUnauthorized: false,
+          },
         },
       }
     );
