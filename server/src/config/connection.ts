@@ -1,30 +1,23 @@
-import dotenv from 'dotenv';
-import { fileURLToPath } from 'url';
-import path from 'path';
-
-// Get the directory name of the current module
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Load environment variables from the client folder
-dotenv.config({ path: path.resolve(__dirname, '../../../client/.env') });
-
+// filepath: /C:/Users/macev/bootcamp/WellRead-v1/server/src/config/connection.ts
 import { Sequelize } from 'sequelize';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const sequelize = process.env.DB_URL
   ? new Sequelize(process.env.DB_URL)
   : new Sequelize(
       process.env.DB_NAME || '',
       process.env.DB_USER || '',
-      process.env.DB_PASSWORD || '', // Ensure this is a string
+      process.env.DB_PASSWORD || '',
       {
-        host: process.env.DB_URL || 'localhost',
-        dialect: 'postgres',
+        host: process.env.DB_HOST || 'localhost',
+        port: Number(process.env.DB_PORT) || 5432,
+        dialect: process.env.DB_DIALECT as any || 'postgres',
         dialectOptions: {
           decimalNumbers: true,
-          },
         },
-      
+      }
     );
 
 export default sequelize;
