@@ -7,9 +7,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load environment variables from the .env file located at the root directory
-dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
-
+// Load environment variables from the .env file located in the server directory
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 console.log('DB_NAME:', process.env.DB_NAME);
 console.log('DB_USER:', process.env.DB_USER);
 console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
